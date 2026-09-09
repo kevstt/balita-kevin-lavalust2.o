@@ -963,6 +963,12 @@ class Model {
      */
     public function __get($key)
     {
+        if ($key === 'db') {
+            if (!isset(lava_instance()->db) && isset(lava_instance()->call) && method_exists(lava_instance()->call, 'database')) {
+                lava_instance()->call->database();
+            }
+        }
+
         return lava_instance()->$key;
     }
                             
