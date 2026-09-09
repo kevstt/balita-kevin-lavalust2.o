@@ -2,15 +2,5 @@
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
-    # Let direct requests to the public front controller pass through.
-    RewriteRule ^public/ - [L]
     RewriteRule ^(.*)$ public/index.php [L,QSA]
-
-    RedirectMatch 403 ^/(app|scheme|console|runtime)/
-
-    <FilesMatch "\.(env|json|xml|log|md|lock|git|ini|bak|sql)$">
-        Require all denied
-    </FilesMatch>
-
 </IfModule>
