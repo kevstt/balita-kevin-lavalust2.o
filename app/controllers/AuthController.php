@@ -18,7 +18,6 @@ class AuthController extends Controller
         ]);
         unset($_SESSION['login_error']);
     }
-
     public function authenticate()
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -27,10 +26,28 @@ class AuthController extends Controller
 
         $username = trim((string) ($this->io->post('username') ?? ''));
         $password = (string) ($this->io->post('password') ?? '');
-        $expectedUsername = getenv('ADMIN_USERNAME') ?: 'admin';
-        $expectedPassword = getenv('ADMIN_PASSWORD') ?: 'change-me';
+        $accounts = [
+            [
+                'username' => getenv('ADMIN_USERNAME') ?: 'admin',
+                'password' => getenv('ADMIN_PASSWORD') ?: 'change-me',
+                'role' => 'admin',
+            ],
+            [
+                'username' => getenv('USER_USERNAME') ?: 'user',
+                'password' => getenv('USER_PASSWORD') ?: 'user123',
+                'role' => 'user',
+            ],
+        ];
 
-        if ($username !== $expectedUsername || !hash_equals($expectedPassword, $password)) {
+        $account = null;
+        foreach ($accounts as $candidate) {
+            if ($username === $candidate['username'] && hash_equals($candidate['password'], $password)) {
+                $account = $candidate;
+                break;
+            }
+        }
+
+        if ($account === null) {
             $_SESSION['login_error'] = 'The credentials do not match. Please try again.';
             redirect('login');
         }
@@ -38,6 +55,7 @@ class AuthController extends Controller
         session_regenerate_id(true);
         $_SESSION['authenticated'] = true;
         $_SESSION['username'] = $username;
+        $_SESSION['role'] = $account['role'];
         $destination = $_SESSION['auth_redirect'] ?? 'products';
         unset($_SESSION['auth_redirect']);
         redirect($destination);

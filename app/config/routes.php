@@ -15,9 +15,9 @@ $router->get('/logout', 'AuthController::logout');
 
 $router->get('/products', 'ProductController::index')->middleware('auth');
 $router->get('/product', 'ProductController::index')->middleware('auth');
-$router->get('/products/create', 'ProductController::create')->middleware('auth');
-$router->post('/products', 'ProductController::store')->middleware('auth');
-$router->get('/products/edit/{id}', 'ProductController::edit')->where_number('id')->middleware('auth');
-$router->post('/products/update/{id}', 'ProductController::update')->where_number('id')->middleware('auth');
-$router->get('/products/delete/{id}', 'ProductController::delete')->where_number('id')->middleware('auth');
+$router->get('/products/create', 'ProductController::create')->middleware(['auth', 'admin']);
+$router->post('/products', 'ProductController::store')->middleware(['auth', 'admin']);
+$router->get('/products/edit/{id}', 'ProductController::edit')->where_number('id')->middleware(['auth', 'admin']);
+$router->post('/products/update/{id}', 'ProductController::update')->where_number('id')->middleware(['auth', 'admin']);
+$router->get('/products/delete/{id}', 'ProductController::delete')->where_number('id')->middleware(['auth', 'admin']);
 

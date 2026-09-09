@@ -267,6 +267,10 @@ Use the repository `Dockerfile` as the Render Docker deployment. Set these Rende
 
 The application redirects unauthenticated visitors from every product route to `/login`. After authentication, the product list supports create, read, update, and delete operations against Aiven MySQL.
 
+### User roles
+
+The default local credentials are `admin` / `change-me` for full product management and `user` / `user123` for read-only product viewing. Configure `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `USER_USERNAME`, and `USER_PASSWORD` in Render instead of relying on defaults.
+
 ---
 
 ## Contributing
