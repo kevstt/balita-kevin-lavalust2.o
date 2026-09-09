@@ -48,6 +48,7 @@ class AuthController extends Controller
         }
 
         if ($account === null) {
+            unset($_SESSION['authenticated'], $_SESSION['username'], $_SESSION['role']);
             $_SESSION['login_error'] = 'The credentials do not match. Please try again.';
             redirect('login');
         }
