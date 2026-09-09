@@ -9,6 +9,12 @@ class AdminMiddleware
             session_start();
         }
 
+        if (empty($_SESSION['authenticated'])) {
+            $_SESSION['auth_redirect'] = $_SERVER['REQUEST_URI'] ?? '/product';
+            redirect('login');
+            exit();
+        }
+
         if (($_SESSION['role'] ?? '') !== 'admin') {
             $_SESSION['product_flash'] = 'Read-only accounts cannot change products.';
             redirect('product');

@@ -9,8 +9,10 @@ class AuthMiddleware
             session_start();
         }
 
-        if (empty($_SESSION['authenticated'])) {
-            $_SESSION['auth_redirect'] = $_SERVER['REQUEST_URI'] ?? '/products';
+        $role = $_SESSION['role'] ?? '';
+        if (empty($_SESSION['authenticated']) || !in_array($role, ['admin', 'user'], true)) {
+            unset($_SESSION['authenticated'], $_SESSION['username'], $_SESSION['role']);
+            $_SESSION['auth_redirect'] = $_SERVER['REQUEST_URI'] ?? '/product';
             redirect('login');
             exit();
         }
