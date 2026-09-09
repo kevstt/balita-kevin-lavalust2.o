@@ -75,8 +75,8 @@ class Errors
 			$template_path = APP_DIR . 'views/errors/';
 		}
 
-		if (!headers_sent()) {
-			http_response_code($code);
+		if (function_exists('http_response_code') && !headers_sent()) {
+			@http_response_code($code);
 		}
 		require_once($template_path.$template.'.php');
 		exit();
@@ -155,8 +155,8 @@ class Errors
 		$line = $error_line;
 		$trace = $error_trace;
 
-		if (!headers_sent()) {
-			http_response_code(500);
+		if (function_exists('http_response_code') && !headers_sent()) {
+			@http_response_code(500);
 		}
 		require_once($template_path . $template . '.php');
 		exit();
