@@ -51,6 +51,7 @@ class AuthController extends Controller
             unset($_SESSION['authenticated'], $_SESSION['username'], $_SESSION['role']);
             $_SESSION['login_error'] = 'The credentials do not match. Please try again.';
             redirect('login');
+            return;
         }
 
         session_regenerate_id(true);
