@@ -7,5 +7,5 @@ $router->get('/', 'Welcome::index');
 $router->get('/student', 'StudentController::index');
 $router->get('/student/profile', 'StudentController::profile')->middleware('student_access');
 $router->get('/student/grant_access', 'StudentController::grant_access');
-$router->get('/user', 'UsersController::index');
-$router->get('/users', 'UsersController::index');
+$router->get('/user', 'User::index');
+$router->get('/users', 'User::index');
