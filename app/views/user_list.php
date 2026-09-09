@@ -23,15 +23,21 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $user): ?>
+            <?php if (!empty($users)): ?>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($user['id'] ?? ''); ?></td>
+                        <td><?= htmlspecialchars($user['firstname'] ?? ''); ?></td>
+                        <td><?= htmlspecialchars($user['lastname'] ?? ''); ?></td>
+                        <td><?= htmlspecialchars($user['email'] ?? ''); ?></td>
+                        <td><?= htmlspecialchars($user['username'] ?? ''); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
-                    <td><?= htmlspecialchars($user['id']); ?></td>
-                    <td><?= htmlspecialchars($user['firstname']); ?></td>
-                    <td><?= htmlspecialchars($user['lastname']); ?></td>
-                    <td><?= htmlspecialchars($user['email']); ?></td>
-                    <td><?= htmlspecialchars($user['username']); ?></td>
+                    <td colspan="5">No users found.</td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
 </body>
