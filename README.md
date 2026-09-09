@@ -246,6 +246,27 @@ Topics covered include:
 - REST API development
 - Security best practices
 
+## Product Archive Application
+
+This repository includes an authenticated product CRUD application at `/products`.
+
+### Local setup
+
+1. Copy `.env.example` to `.env` and set `APP_KEY`, `ADMIN_USERNAME`, and `ADMIN_PASSWORD`.
+2. Set `DB_HOSTNAME`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, and `DB_DATABASE` to the Aiven MySQL connection values.
+3. Point Apache at `public/`, or run `php -S localhost:8000 -t public` from the project root.
+4. Open `/login`, sign in with the configured admin credentials, and manage products.
+
+The `products` table is created automatically on the first authenticated product request with the required `id`, `product_name`, `description`, `price`, `quantity`, and `created_at` columns.
+
+### Render deployment
+
+Use the repository `Dockerfile` as the Render Docker deployment. Set these Render environment variables and never commit their values:
+
+`APP_ENV=production`, `APP_URL=https://your-render-service.onrender.com`, `APP_KEY=<long-random-value>`, `ADMIN_USERNAME=<admin-name>`, `ADMIN_PASSWORD=<strong-password>`, `DB_DRIVER=mysql`, `DB_HOSTNAME=<aiven-host>`, `DB_PORT=<aiven-port>`, `DB_USERNAME=<aiven-user>`, `DB_PASSWORD=<aiven-password>`, and `DB_DATABASE=<aiven-database>`.
+
+The application redirects unauthenticated visitors from every product route to `/login`. After authentication, the product list supports create, read, update, and delete operations against Aiven MySQL.
+
 ---
 
 ## Contributing

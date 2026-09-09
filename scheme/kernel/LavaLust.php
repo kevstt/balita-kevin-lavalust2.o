@@ -236,6 +236,11 @@ if (php_sapi_name() === 'cli') {
     
 } else {
 	$request_path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+	$script_directory = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+	$script_directory = rtrim($script_directory, '/');
+	if ($script_directory !== '' && $script_directory !== '/' && strpos($request_path, $script_directory) === 0) {
+		$request_path = substr($request_path, strlen($script_directory));
+	}
 	$url = $router->sanitize_url($request_path);
     $method = isset($_SERVER['REQUEST_METHOD']) ? strtoupper($_SERVER['REQUEST_METHOD']) : 'GET';
 }
