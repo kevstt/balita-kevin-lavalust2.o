@@ -1,6 +1,0 @@
-.env
-.git
-.gitignore
-runtime/*
-!runtime/.htaccess
-!runtime/index.html
