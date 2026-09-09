@@ -11,7 +11,7 @@ class AdminMiddleware
 
         if (($_SESSION['role'] ?? '') !== 'admin') {
             $_SESSION['product_flash'] = 'Read-only accounts cannot change products.';
-            redirect('products');
+            redirect('product');
             exit();
         }
 

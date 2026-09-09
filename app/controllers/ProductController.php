@@ -53,7 +53,7 @@ class ProductController extends Controller
 
         $this->products->create($data);
         $_SESSION['product_flash'] = 'Product added to your catalogue.';
-        redirect('products');
+        redirect('product');
     }
 
     public function edit($id)
@@ -80,14 +80,14 @@ class ProductController extends Controller
 
         $this->products->update($id, $data);
         $_SESSION['product_flash'] = 'Product details updated.';
-        redirect('products');
+        redirect('product');
     }
 
     public function delete($id)
     {
         $this->products->remove($id);
         $_SESSION['product_flash'] = 'Product removed from your catalogue.';
-        redirect('products');
+        redirect('product');
     }
 
     private function validated_product()

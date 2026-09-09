@@ -10,7 +10,7 @@ class AuthController extends Controller
         }
 
         if (!empty($_SESSION['authenticated'])) {
-            redirect('products');
+            redirect('product');
         }
 
         $this->call->view('auth/login', [
@@ -56,7 +56,7 @@ class AuthController extends Controller
         $_SESSION['authenticated'] = true;
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $account['role'];
-        $destination = $_SESSION['auth_redirect'] ?? 'products';
+        $destination = $_SESSION['auth_redirect'] ?? 'product';
         unset($_SESSION['auth_redirect']);
         redirect($destination);
     }

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="shell">
-        <header class="topbar"><a class="brand" href="<?= site_url('products'); ?>">product<span>/</span>archive</a><nav><span><?= htmlspecialchars($_SESSION['username'] ?? 'admin'); ?></span><a href="<?= site_url('logout'); ?>">Sign out</a></nav></header>
+        <header class="topbar"><a class="brand" href="<?= site_url('product'); ?>">product<span>/</span>archive</a><nav><span><?= htmlspecialchars($_SESSION['username'] ?? 'admin'); ?></span><a href="<?= site_url('logout'); ?>">Sign out</a></nav></header>
         <main>
             <p class="eyebrow">A considered inventory</p>
             <h1>Objects with a place in the world.</h1>
