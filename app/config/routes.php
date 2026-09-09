@@ -14,6 +14,7 @@ $router->post('/login', 'AuthController::authenticate');
 $router->get('/logout', 'AuthController::logout');
 
 $router->get('/products', 'ProductController::index')->middleware('auth');
+$router->get('/product', 'ProductController::index')->middleware('auth');
 $router->get('/products/create', 'ProductController::create')->middleware('auth');
 $router->post('/products', 'ProductController::store')->middleware('auth');
 $router->get('/products/edit/{id}', 'ProductController::edit')->where_number('id')->middleware('auth');
